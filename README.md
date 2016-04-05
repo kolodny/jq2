@@ -17,20 +17,21 @@ npm install -g jq2
 jq2 <lookupstring> [filename]
 ```
 
-if no filename is provided it will use stdin. `$` in the `<lookupstring>` is a reference to the javascript object.
+if no filename is provided it will use stdin.
+`$` in the `<lookupstring>` is a reference to the javascript object.
 
 ### examples
 
 ```bash
-echo '{"a": {"b": [ 123 ]}}' | jq2 '$.a.b[0]' # 123
-echo '{"a": {"b": [ 123 ]}}' | jq2 'Math.pow($.a.b[0], 2)' # 15129
-echo '["  foo bar  ", "   baz  "]' | jq2 '$.map(s => s.trim()).join("")' # foo barbaz
+echo '{"a": {"b": [ 123 ]}}' | jq2 '$.a.b[0]' #123
+echo '{"a": {"b": [ 123 ]}}' | jq2 'Math.pow($.a.b[0], 2)' #15129
+echo '[" foo bar "," baz "]' | jq2 '$.map(s => s.trim()).join("")' #foo barbaz
 
 # lodash is included so this will work too
-echo '["  foo bar  ", "   baz  "]' | jq2 '$.map(_.trim).join("")' # foo barbaz
+echo '[" foo bar ", " baz "]' | jq2 '$.map(_.trim).join("")' #foo barbaz
 
 echo '{"a": 123}' > file.json
-jq2 '$.a' file.json # 123
+jq2 '$.a' file.json #123
 ```
 
 
